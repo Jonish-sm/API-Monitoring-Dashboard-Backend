@@ -17,8 +17,9 @@ export class HealthLogsController {
     findByEndpoint(
         @Param('endpointId') endpointId: string,
         @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
+        @Query('offset', new ParseIntPipe({ optional: true })) offset?: number,
     ) {
-        return this.healthLogsService.findByEndpoint(endpointId, limit);
+        return this.healthLogsService.findByEndpoint(endpointId, limit, offset);
     }
 
     @Get('analytics/:endpointId')

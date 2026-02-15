@@ -36,13 +36,14 @@ export class HealthLogsService {
             .offset(offset);
     }
 
-    async findByEndpoint(endpointId: string, limit = 50) {
+    async findByEndpoint(endpointId: string, limit = 50, offset = 0) {
         return this.db
             .select()
             .from(schema.healthLogs)
             .where(eq(schema.healthLogs.endpointId, endpointId))
             .orderBy(desc(schema.healthLogs.checkedAt))
-            .limit(limit);
+            .limit(limit)
+            .offset(offset);
     }
 
     async getAnalytics(endpointId: string, hoursBack = 24) {

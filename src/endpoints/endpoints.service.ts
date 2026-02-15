@@ -1,6 +1,6 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { eq, like } from 'drizzle-orm';
+import { eq, ilike, like } from 'drizzle-orm';
 import * as schema from '../../drizzle/schema';
 import { DATABASE_CONNECTION } from '../database/database.module';
 import { CreateEndpointDto } from './dto/create-endpoint.dto';
@@ -35,8 +35,8 @@ export class EndpointsService {
       .from(schema.endpoints)
       .where(
         endpointName
-          ? like(schema.endpoints.name, `%${endpointName}%`)
-          : undefined,
+          ? ilike(schema.endpoints.name, `%${endpointName}%`)
+          : undefined
       )
       .limit(limit)
       .offset(offset);
