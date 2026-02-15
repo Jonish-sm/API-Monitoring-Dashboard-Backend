@@ -18,8 +18,9 @@ export class AlertsController {
         @Query('acknowledged', new ParseBoolPipe({ optional: true }))
         acknowledged?: boolean,
         @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
+        @Query('offset', new ParseIntPipe({ optional: true })) offset?: number,
     ) {
-        return this.alertsService.findAll(acknowledged, limit);
+        return this.alertsService.findAll(acknowledged, limit, offset);
     }
 
     @Get('endpoint/:endpointId')

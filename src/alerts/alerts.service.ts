@@ -32,14 +32,15 @@ export class AlertsService {
         return alert;
     }
 
-    async findAll(acknowledged?: boolean, limit = 100) {
+    async findAll(acknowledged?: boolean, limit = 100, offset = 0) {
         if (acknowledged !== undefined) {
             return this.db
                 .select()
                 .from(schema.alerts)
                 .where(eq(schema.alerts.isAcknowledged, acknowledged))
                 .orderBy(desc(schema.alerts.createdAt))
-                .limit(limit);
+                .limit(limit)
+                .offset(offset);
         }
 
         return this.db
